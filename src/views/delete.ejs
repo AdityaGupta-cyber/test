@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Delete</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        img {
+            max-width: 200px;
+            height: auto;
+            border-radius: 8px;
+        }
+        .button {
+            margin: 20px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .confirm-button {
+            background-color: #f44336;
+            color: white;
+        }
+        .cancel-button {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Confirm Deletion</h1>
+    <img src="<%= dogPic.imageUrl %>" alt="Dog Picture">
+    <p>Description: <%= dogPic.description || 'No description provided' %></p>
+    <p>Are you sure you want to delete this dog picture?</p>
+
+    <form action="/delete/<%= dogPic.id %>" method="POST">
+        <button type="submit" class="button confirm-button">Yes, Delete</button>
+    </form>
+    <a href="/list" class="button cancel-button">Cancel</a>
+</body>
+</html>

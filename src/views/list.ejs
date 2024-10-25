@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dog Pictures</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .dog-pic {
+            margin: 10px;
+            display: inline-block;
+            text-align: center;
+        }
+        img {
+            max-width: 200px;
+            height: 160px;
+            border-radius: 8px;
+            cursor: pointer; /* Change cursor to pointer */
+        }
+        .logout-button, .upload-button, .delete-button, .edit-button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .logout-button {
+            background-color: #f44336;
+            color: white;
+        }
+        .upload-button {
+            width: fit-content;
+            background-color: #4CAF50;
+            color: white;
+        }
+        .delete-button {
+            background-color: #f44336;
+            color: white;
+            margin-top: 10px;
+        }
+        .edit-button {
+            background-color: #2196F3;
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .gallery {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .gallery ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .gallery li {
+            display: inline-block;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dog Pictures</h1>
+    
+    <form action="/logout" method="POST">
+        <button type="submit" class="logout-button">Logout</button>
+    </form>
+    <a href="/uploadPic" class="upload-button">Upload Dog Picture</a>
+
+    <div class="gallery">
+        <% if (dogPics && dogPics.length > 0) { %>
+            <ul>
+                <% dogPics.forEach(pic => { %>
+                    <li class="dog-pic">
+                        <a href="/list/<%= pic.id %>"> <!-- Link to the single image view -->
+                            <img 
+                                src="<%= pic.imageUrl %>" 
+                                alt="Dog Picture"
+                                onerror="this.onerror=null; this.src='/images/fallback-dog.jpg';"
+                            >
+                        </a>
+                        <p>Uploaded by - <%= pic.user.username || 'Unable to fetch the uploader' %></p>
+                        <p><%= pic.description || 'No description provided' %></p>
+                        
+                        <!-- Delete Button -->
+                        <form action="/delete/<%= pic.id %>" method="GET" style="display:inline;">
+                            <button type="submit" class="delete-button">Delete</button>
+                        </form>
+
+                        <!-- Edit Button -->
+                        <a href="/edit/<%= pic.id %>" class="edit-button">Edit</a>
+                    </li>
+                <% }); %>
+            </ul>
+        <% } else { %>
+            <p>No dog pictures uploaded yet.</p>
+        <% } %>
+    </div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Dog Picture</title>
+    <style>
+            .updateForm{
+                display: flex;
+                flex-direction: column;
+                width: 25%;
+            }
+    </style>
+</head>
+<body>
+    <h1>Edit Dog Picture</h1>
+    <form action="/update/<%= dogPic.id %>" class="updateForm" method="POST" enctype="multipart/form-data">
+        <img src="<%= dogPic.imageUrl %>" alt="Dog Picture" style="max-width: 200px; height: auto;">
+        <p>Current Description: <%= dogPic.description || 'No description provided' %></p>
+        <label for="description">New Description:</label>
+        <input type="text" name="description" id="description" value="<%= dogPic.description %>">
+        <br>
+        <label for="image">Upload New Image (optional):</label>
+        <input type="file" name="image" id="image" accept="image/*">
+        <br>
+        <button type="submit">Update Picture</button>   
+    </form>
+    <a href="/list">Cancel</a>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Dog Picture</title>
+</head>
+<body>
+    <h1>Upload Dog Picture</h1>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <label for="image">Select Dog Picture:</label>
+        <input type="file" name="image" accept="image/*" required>
+        <br>
+        <label for="description">Description:</label>
+        <input type="text" name="description">
+        <br>
+        <button type="submit">Upload</button>
+    </form>
+    <a href="/list">Back to Dog Pictures</a>
+</body>
+</html>
